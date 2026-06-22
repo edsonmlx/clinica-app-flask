@@ -12,6 +12,9 @@ class Especialidad(db.Model):
     def __repr__(self):
         return self.nombre
 
+    def __lt__(self, other):
+        return self.nombre < other.nombre
+
 
 class Medico(db.Model):
     __tablename__ = 'medico'

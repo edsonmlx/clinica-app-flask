@@ -1,8 +1,12 @@
 from flask_appbuilder import ModelView
+from flask_appbuilder import aggregate_count
+from flask_appbuilder.charts.views import GroupByChartView
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 from . import appbuilder, db
 from .models import Especialidad, Medico, Paciente, Cita, Consulta, Receta, Factura
 
+
+# ===================== VISTAS CRUD =====================
 
 class EspecialidadView(ModelView):
     datamodel = SQLAInterface(Especialidad)
@@ -47,3 +51,48 @@ appbuilder.add_view(CitaView, "Citas", icon="fa-calendar", category="Clínica")
 appbuilder.add_view(ConsultaView, "Consultas", icon="fa-stethoscope", category="Clínica")
 appbuilder.add_view(RecetaView, "Recetas", icon="fa-medkit", category="Clínica")
 appbuilder.add_view(FacturaView, "Facturas", icon="fa-money", category="Clínica")
+
+
+# ===================== GRÁFICAS =====================
+
+class CitaChartView(GroupByChartView):
+    datamodel = SQLAInterface(Cita)
+    chart_title = 'Citas por Estado'
+    definitions = [
+        {
+            'group': 'estado',
+            'series': [(aggregate_count, 'estado')]
+        }
+    ]
+
+
+class MedicoChartView(GroupByChartView):
+    datamodel = SQLAInterface(Medico)
+    chart_title = 'Médicos por Especialidad'
+    definitions = [
+        {
+            'group': 'especialidad',
+            'series': [(aggregate_count, 'especialidad')]
+        }
+    ]
+
+
+class FacturaChartView(GroupByChartView):
+    datamodel = SQLAInterface(Factura)
+    chart_title = 'Facturas por Estado'
+    definitions = [
+        {
+            'group': 'estado',
+            'series': [(aggregate_count, 'estado')]
+        }
+    ]
+
+
+appbuilder.add_view_no_menu(CitaChartView)
+appbuilder.add_link("Citas por Estado", href="/citachartview/chart/", icon="fa-bar-chart", category="Reportes")
+
+appbuilder.add_view_no_menu(MedicoChartView)
+appbuilder.add_link("Médicos por Especialidad", href="/medicochartview/chart/", icon="fa-bar-chart", category="Reportes")
+
+appbuilder.add_view_no_menu(FacturaChartView)
+appbuilder.add_link("Facturas por Estado", href="/facturachartview/chart/", icon="fa-bar-chart", category="Reportes")
