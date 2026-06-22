@@ -1,0 +1,56 @@
+{% extends "appbuilder/base.html" %}
+{% block content %}
+<div class="container-fluid" style="padding-top: 20px;">
+  <h2 style="margin-bottom: 25px;">Panel de Control - Clínica</h2>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-primary" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ total_pacientes }}</h1>
+          <p>Pacientes</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-info" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ total_medicos }}</h1>
+          <p>Médicos</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-success" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ total_citas }}</h1>
+          <p>Citas Totales</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-warning" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ citas_hoy }}</h1>
+          <p>Citas Hoy</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-default" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ total_consultas }}</h1>
+          <p>Consultas</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-danger" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
+        <div class="panel-body text-center" style="padding:20px;">
+          <h1>{{ facturas_pendientes }}</h1>
+          <p>Facturas Pendientes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
