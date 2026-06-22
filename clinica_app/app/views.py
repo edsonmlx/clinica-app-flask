@@ -96,3 +96,10 @@ appbuilder.add_link("Médicos por Especialidad", href="/medicochartview/chart/",
 
 appbuilder.add_view_no_menu(FacturaChartView)
 appbuilder.add_link("Facturas por Estado", href="/facturachartview/chart/", icon="fa-bar-chart", category="Reportes")
+
+from .reports_view import ReportesView
+
+appbuilder.add_view_no_menu(ReportesView)
+appbuilder.add_link("Citas por Médico", href="/reportes/citas-por-medico", icon="fa-table", category="Reportes")
+appbuilder.add_link("Pacientes Atendidos", href="/reportes/pacientes-atendidos", icon="fa-table", category="Reportes")
+appbuilder.add_link("Facturación", href="/reportes/facturacion", icon="fa-table", category="Reportes")
