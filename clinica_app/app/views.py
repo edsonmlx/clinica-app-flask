@@ -103,3 +103,9 @@ appbuilder.add_view_no_menu(ReportesView)
 appbuilder.add_link("Citas por Médico", href="/reportes/citas-por-medico", icon="fa-table", category="Reportes")
 appbuilder.add_link("Pacientes Atendidos", href="/reportes/pacientes-atendidos", icon="fa-table", category="Reportes")
 appbuilder.add_link("Facturación", href="/reportes/facturacion", icon="fa-table", category="Reportes")
+from .pronosticos_view import PronosticosView
+
+appbuilder.add_view_no_menu(PronosticosView)
+appbuilder.add_link("Pronóstico: Citas", href="/pronosticos/citas", icon="fa-magic", category="Pronósticos IA")
+appbuilder.add_link("Pronóstico: Médicos", href="/pronosticos/medicos", icon="fa-magic", category="Pronósticos IA")
+appbuilder.add_link("Pronóstico: Facturación", href="/pronosticos/facturas", icon="fa-magic", category="Pronósticos IA")

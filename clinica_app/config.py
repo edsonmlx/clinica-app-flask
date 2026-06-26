@@ -108,3 +108,5 @@ IMG_UPLOAD_URL = "/static/uploads/"
 # APP_THEME = "spacelab.css"
 # APP_THEME = "united.css"
 # APP_THEME = "yeti.css"
+
+GROQ_API_KEY = "PEGAR_API_KEY_AQUI"
