@@ -7,7 +7,7 @@ class ClinicaIndexView(IndexView):
     @expose('/')
     def index(self):
         from app import db
-        from app.models import Paciente, Medico, Cita, Consulta, Factura
+        from app.models import Paciente, Medico, Cita, Consulta, Factura, Especialidad
         import datetime
 
         total_pacientes = db.session.query(Paciente).count()
@@ -21,6 +21,28 @@ class ClinicaIndexView(IndexView):
             Factura.estado == 'Pendiente'
         ).count()
 
+        proximas_citas = (
+            db.session.query(Cita)
+            .filter(Cita.fecha >= datetime.date.today())
+            .order_by(Cita.fecha.asc())
+            .limit(5)
+            .all()
+        )
+
+        especialidades = db.session.query(Especialidad).all()
+
+        ahora = datetime.datetime.now()
+        if ahora.hour < 12:
+            saludo = "Buenos días"
+        elif ahora.hour < 19:
+            saludo = "Buenas tardes"
+        else:
+            saludo = "Buenas noches"
+
+        meses = ["enero","febrero","marzo","abril","mayo","junio","julio",
+                 "agosto","septiembre","octubre","noviembre","diciembre"]
+        fecha_texto = f"{ahora.day} de {meses[ahora.month-1]} de {ahora.year}"
+
         return self.render_template(
             self.index_template,
             total_pacientes=total_pacientes,
@@ -28,5 +50,9 @@ class ClinicaIndexView(IndexView):
             total_citas=total_citas,
             citas_hoy=citas_hoy,
             total_consultas=total_consultas,
-            facturas_pendientes=facturas_pendientes
+            facturas_pendientes=facturas_pendientes,
+            proximas_citas=proximas_citas,
+            especialidades=especialidades,
+            saludo=saludo,
+            fecha_texto=fecha_texto
         )

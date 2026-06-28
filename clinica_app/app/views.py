@@ -109,3 +109,17 @@ appbuilder.add_view_no_menu(PronosticosView)
 appbuilder.add_link("Pronóstico: Citas", href="/pronosticos/citas", icon="fa-magic", category="Pronósticos IA")
 appbuilder.add_link("Pronóstico: Médicos", href="/pronosticos/medicos", icon="fa-magic", category="Pronósticos IA")
 appbuilder.add_link("Pronóstico: Facturación", href="/pronosticos/facturas", icon="fa-magic", category="Pronósticos IA")
+
+from flask_appbuilder import BaseView, expose as expose_view
+
+
+class ServiciosView(BaseView):
+    route_base = "/servicios"
+    default_view = "lista"
+
+    @expose_view('/lista')
+    def lista(self):
+        return self.render_template('servicios.html')
+
+
+appbuilder.add_view(ServiciosView, "Servicios", icon="fa-list-alt", category="Inicio")

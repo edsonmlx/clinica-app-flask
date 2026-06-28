@@ -1,14 +1,23 @@
 {% extends "appbuilder/base.html" %}
 {% block content %}
-<div class="container-fluid" style="padding-top: 20px;">
-  <h2>{{ titulo }}</h2>
-  <div class="panel panel-info" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15); margin-top:20px;">
-    <div class="panel-heading" style="background-color:#2c3e50; color:white; padding:12px;">
-      <strong>Análisis generado por IA (Gemini)</strong>
+<div class="container-fluid" style="padding: 30px 40px;">
+  <h2 class="titulo-pronostico">
+    <i class="fa fa-magic" style="margin-right:10px; color:#4fd1c5;"></i>{{ titulo }}
+  </h2>
+  <p class="subtitulo-pronostico">Análisis predictivo generado por Inteligencia Artificial basado en los datos actuales de la clínica.</p>
+
+  <div class="row" style="margin-top:25px;">
+    {% for p in pronostico %}
+    <div class="col-md-4">
+      <div class="pronostico-card">
+        <div class="pronostico-numero">{{ loop.index }}</div>
+        <div class="pronostico-icono">
+          <i class="fa {{ ['fa-chart-line','fa-lightbulb','fa-triangle-exclamation'][loop.index0 % 3] }}"></i>
+        </div>
+        <p class="pronostico-texto">{{ p }}</p>
+      </div>
     </div>
-    <div class="panel-body" style="padding:20px; white-space: pre-line; font-size:15px;">
-      {{ pronostico }}
-    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

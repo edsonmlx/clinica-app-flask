@@ -1,56 +1,161 @@
 {% extends "appbuilder/base.html" %}
 {% block content %}
-<div class="container-fluid" style="padding-top: 20px;">
-  <h2 style="margin-bottom: 25px;">Panel de Control - Clínica</h2>
+<div class="container-fluid" style="padding: 30px 40px;">
+
+  <div class="hero-banner">
+    <i class="fa fa-plus-square hero-icon"></i>
+    <p style="font-size:14px; opacity:.85; margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">{{ fecha_texto }}</p>
+    <h1>{{ saludo }}, bienvenido al Sistema de Gestión Clínica</h1>
+    <p style="font-size:16px; margin-top:10px;">Administra pacientes, médicos, citas, consultas, recetas y facturación desde un solo lugar, con análisis inteligente en tiempo real.</p>
+  </div>
+
+  <h3 style="margin:35px 0 20px;"><i class="fa fa-chart-pie" style="color:#4fd1c5; margin-right:8px;"></i>Resumen General</h3>
   <div class="row">
     <div class="col-md-2">
-      <div class="panel panel-primary" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-primary">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-user" style="font-size:26px; color:#1b9cfc;"></i>
           <h1>{{ total_pacientes }}</h1>
           <p>Pacientes</p>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-info" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-info">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-user-md" style="font-size:26px; color:#00bfa6;"></i>
           <h1>{{ total_medicos }}</h1>
           <p>Médicos</p>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-success" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-success">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-calendar" style="font-size:26px; color:#2ecc71;"></i>
           <h1>{{ total_citas }}</h1>
           <p>Citas Totales</p>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-warning" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-warning">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-clock" style="font-size:26px; color:#f6b93b;"></i>
           <h1>{{ citas_hoy }}</h1>
           <p>Citas Hoy</p>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-default" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-default">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-stethoscope" style="font-size:26px; color:#7f8c8d;"></i>
           <h1>{{ total_consultas }}</h1>
           <p>Consultas</p>
         </div>
       </div>
     </div>
     <div class="col-md-2">
-      <div class="panel panel-danger" style="border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.15);">
-        <div class="panel-body text-center" style="padding:20px;">
+      <div class="panel panel-danger">
+        <div class="panel-body text-center" style="padding:25px;">
+          <i class="fa fa-file-invoice-dollar" style="font-size:26px; color:#e74c3c;"></i>
           <h1>{{ facturas_pendientes }}</h1>
           <p>Facturas Pendientes</p>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="row" style="margin-top:35px;">
+    <!-- Próximas citas -->
+    <div class="col-md-7">
+      <h3 style="margin-bottom:20px;"><i class="fa fa-calendar-check" style="color:#4fd1c5; margin-right:8px;"></i>Próximas Citas</h3>
+      <div class="panel" style="padding:0; overflow:hidden;">
+        <table class="table" style="margin-bottom:0;">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Médico</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cita in proximas_citas %}
+            <tr>
+              <td>{{ cita.paciente.nombre if cita.paciente else '—' }}</td>
+              <td>{{ cita.medico.nombre if cita.medico else '—' }}</td>
+              <td>{{ cita.fecha }}</td>
+              <td>{{ cita.hora or '—' }}</td>
+              <td>
+                <span style="padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;
+                  {% if cita.estado == 'Pendiente' %} background:#fff3cd; color:#a87900;
+                  {% elif cita.estado == 'Confirmada' %} background:#d4f5e9; color:#0d7a4f;
+                  {% else %} background:#f0f0f0; color:#666; {% endif %}">
+                  {{ cita.estado }}
+                </span>
+              </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" style="text-align:center; padding:25px; color:#888;">No hay citas próximas registradas</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Especialidades disponibles -->
+    <div class="col-md-5">
+      <h3 style="margin-bottom:20px;"><i class="fa fa-stethoscope" style="color:#4fd1c5; margin-right:8px;"></i>Especialidades</h3>
+      <div class="panel" style="padding:22px;">
+        {% for esp in especialidades %}
+        <span style="display:inline-block; background:linear-gradient(90deg,#117a8a,#1b9cfc); color:white; padding:7px 16px; border-radius:20px; margin:5px; font-size:13px; font-weight:500;">
+          <i class="fa fa-circle" style="font-size:6px; margin-right:6px;"></i>{{ esp.nombre }}
+        </span>
+        {% else %}
+        <p style="color:#888;">No hay especialidades registradas</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin:40px 0 20px;"><i class="fa fa-bolt" style="color:#4fd1c5; margin-right:8px;"></i>Accesos Rápidos</h3>
+  <div class="row">
+    <div class="col-md-3" style="margin-bottom:20px;">
+      <a href="/pacienteview/list/" style="text-decoration:none;">
+        <div class="panel panel-default quick-card" style="text-align:center; padding:25px;">
+          <i class="fa fa-user-plus" style="font-size:30px;"></i>
+          <p style="margin-top:12px; color:#14304a; font-weight:600;">Nuevo Paciente</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3" style="margin-bottom:20px;">
+      <a href="/citaview/list/" style="text-decoration:none;">
+        <div class="panel panel-default quick-card" style="text-align:center; padding:25px;">
+          <i class="fa fa-calendar-plus" style="font-size:30px;"></i>
+          <p style="margin-top:12px; color:#14304a; font-weight:600;">Nueva Cita</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3" style="margin-bottom:20px;">
+      <a href="/citachartview/chart/" style="text-decoration:none;">
+        <div class="panel panel-default quick-card" style="text-align:center; padding:25px;">
+          <i class="fa fa-chart-bar" style="font-size:30px;"></i>
+          <p style="margin-top:12px; color:#14304a; font-weight:600;">Ver Gráficas</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3" style="margin-bottom:20px;">
+      <a href="/pronosticos/citas" style="text-decoration:none;">
+        <div class="panel panel-default quick-card" style="text-align:center; padding:25px;">
+          <i class="fa fa-magic" style="font-size:30px;"></i>
+          <p style="margin-top:12px; color:#14304a; font-weight:600;">Pronósticos IA</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
 </div>
 {% endblock %}

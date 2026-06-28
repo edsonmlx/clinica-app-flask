@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body, h1, h2, h3, h4, h5, p, span:not([class*="fa"]), a, button, input, select, textarea, label, li, td, th {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Iconos: restaurar su fuente correcta (version 6, no 5) */
+.fa, .fas, .far, .fab, .fal,
+i[class^="fa-"], i[class*=" fa-"] {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+}
+
+/* ===== Fondo general llamativo ===== */
+body {
+    background: linear-gradient(160deg, #07203a 0%, #0d3a5c 35%, #11577d 70%, #0a4d6e 100%) !important;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Contenedor principal con tarjeta blanca flotante para que el contenido se lea bien sobre el fondo oscuro */
+.container-fluid {
+    background: transparent;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    background: linear-gradient(90deg, #07203a, #0d3a5c, #11577d) !important;
+    border: none !important;
+    box-shadow: 0 3px 14px rgba(0,0,0,.35);
+}
+.navbar .navbar-brand, .navbar a { color: #eaf6fb !important; font-weight: 500; }
+.navbar a:hover { color: #4fd1c5 !important; }
+.navbar-brand { font-weight: 700 !important; letter-spacing: 0.5px; }
+
+/* ===== Hero / Banner animado con brillo ===== */
+.hero-banner {
+    background: linear-gradient(120deg, #0a2e4d, #117a8a, #0a2e4d);
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease infinite;
+    border-radius: 18px;
+    padding: 45px;
+    color: white;
+    box-shadow: 0 12px 35px rgba(0,0,0,.4);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.hero-banner h1 { color: #ffffff !important; font-size: 32px; animation: fadeInUp .8s ease; text-shadow: 0 2px 10px rgba(0,0,0,.3); }
+.hero-banner p { animation: fadeInUp 1s ease; opacity:.95; color:#e8f6fb; }
+.hero-icon { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 100px; opacity: .12; color: white; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== Paneles flotando sobre fondo oscuro ===== */
+.panel {
+    border: none !important;
+    border-radius: 16px !important;
+    background-color: #ffffff !important;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3) !important;
+    animation: fadeIn .6s ease;
+}
+.panel:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,.4) !important; }
+.panel-heading { border-radius: 16px 16px 0 0 !important; font-weight: 600; }
+.panel-primary { border-top: 4px solid #1b9cfc !important; }
+.panel-info { border-top: 4px solid #00e0c0 !important; }
+.panel-success { border-top: 4px solid #2ecc71 !important; }
+.panel-warning { border-top: 4px solid #f6b93b !important; }
+.panel-danger { border-top: 4px solid #ff5e57 !important; }
+.panel-default { border-top: 4px solid #95a5a6 !important; }
+.panel-body h1 { font-weight: 700 !important; color: #0a2e4d; }
+
+/* ===== Titulos sobre fondo oscuro: que se lean bien ===== */
+.container-fluid > h3 {
+    color: #eaf6fb !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,.4);
+}
+
+/* ===== Botones ===== */
+.btn { border-radius: 10px !important; font-weight: 500 !important; padding: 8px 18px !important; transition: all .15s ease; }
+.btn-primary { background: linear-gradient(90deg, #117a8a, #1b9cfc) !important; border: none !important; }
+.btn-primary:hover { background: linear-gradient(90deg, #0d6371, #1583d4) !important; transform: translateY(-2px); }
+
+/* ===== Tablas: van sobre tarjeta blanca de FAB, mantenemos legibles ===== */
+.table thead { background: linear-gradient(90deg, #07203a, #11577d) !important; color: white !important; }
+.table-striped > tbody > tr:nth-of-type(odd) { background-color: #f5f9fb; }
+.table-bordered, .table-bordered td, .table-bordered th { border-color: #dfe9ef !important; }
+
+/* Las paginas internas (listas, formularios) de FAB usan fondo blanco propio; lo dejamos así para legibilidad */
+.panel-body, .table, .form-control { color: #14304a; }
+
+/* ===== Accesos rápidos ===== */
+.quick-card { transition: all .2s ease; }
+.quick-card:hover { transform: translateY(-6px) scale(1.02); }
+.quick-card i { transition: transform .25s ease; color: #117a8a; }
+.quick-card:hover i { transform: scale(1.2) rotate(-5deg); }
+
+/* ===== Login ===== */
+.login-form, .form-signin { border-radius: 18px !important; box-shadow: 0 10px 30px rgba(0,0,0,.3) !important; border: none !important; }
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #1b9cfc; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #07203a; }
+/* ===== Arreglar contraste del menu desplegable ===== */
+.dropdown-menu {
+    border-radius: 10px !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25) !important;
+    padding: 8px 0 !important;
+}
+
+.dropdown-menu > li > a {
+    color: #14304a !important;
+    font-weight: 500;
+    padding: 10px 20px !important;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background: linear-gradient(90deg, #117a8a, #1b9cfc) !important;
+    color: #ffffff !important;
+}
+
+.dropdown-menu > li > a i {
+    color: #117a8a !important;
+    margin-right: 8px;
+}
+
+.dropdown-menu > li > a:hover i {
+    color: #ffffff !important;
+}
+
+/* ===== Tarjeta de Pronosticos IA ===== */
+.pronostico-card {
+    background: linear-gradient(135deg, #ffffff, #f0f8fb);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    border-left: 6px solid #117a8a;
+    overflow: hidden;
+    animation: fadeIn .6s ease;
+}
+
+.pronostico-header {
+    background: linear-gradient(90deg, #07203a, #117a8a);
+    color: white;
+    padding: 18px 25px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pronostico-header i {
+    font-size: 24px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.pronostico-body {
+    padding: 28px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #14304a;
+    white-space: pre-line;
+}
+
+.pronostico-body strong {
+    color: #117a8a;
+}
+
+/* ===== Titulo de pronosticos con buen contraste ===== */
+.titulo-pronostico {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    font-weight: 700 !important;
+}
+.subtitulo-pronostico {
+    color: #cfe8f0 !important;
+    font-size: 15px;
+}
+
+/* ===== Tarjetas de pronostico individuales ===== */
+.pronostico-card {
+    background: linear-gradient(160deg, #ffffff, #eef8fb);
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.3);
+    padding: 30px 25px 25px;
+    margin-bottom: 25px;
+    position: relative;
+    min-height: 200px;
+    transition: transform .2s ease, box-shadow .2s ease;
+    animation: fadeInUp .6s ease;
+    border-top: 5px solid #117a8a;
+}
+.pronostico-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.4);
+}
+.pronostico-numero {
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    background: linear-gradient(135deg, #117a8a, #1b9cfc);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
+.pronostico-icono {
+    font-size: 30px;
+    color: #117a8a;
+    margin: 15px 0 12px;
+    opacity: .85;
+}
+.pronostico-texto {
+    color: #14304a;
+    font-size: 15px;
+    line-height: 1.6;
+}
+/* ===== FIX GLOBAL: todos los titulos h2 de las paginas internas legibles ===== */
+.container-fluid > h2,
+.container-fluid h2:first-child {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    font-weight: 700 !important;
+}
+/* ===== FIX GLOBAL: todos los titulos h3 dentro de paginas (Proximas Citas, Especialidades, etc) ===== */
+.container-fluid h3,
+.container-fluid h3 i {
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+
+body {
+    background: linear-gradient(160deg, #051527 0%, #0a3a5c 35%, #0d5a78 65%, #0a2e4d 100%) !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ===== Blobs animados flotantes ===== */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: .35;
+}
+
+.blob-1 {
+    width: 420px; height: 420px;
+    background: #1b9cfc;
+    top: -100px; left: -100px;
+    animation: floatBlob1 14s ease-in-out infinite;
+}
+
+.blob-2 {
+    width: 500px; height: 500px;
+    background: #4fd1c5;
+    bottom: -150px; right: -120px;
+    animation: floatBlob2 16s ease-in-out infinite;
+}
+
+.blob-3 {
+    width: 320px; height: 320px;
+    background: #117a8a;
+    top: 40%; left: 60%;
+    animation: floatBlob3 20s ease-in-out infinite;
+}
+
+@keyframes floatBlob1 {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(80px, 60px) scale(1.15); }
+}
+@keyframes floatBlob2 {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-60px, -50px) scale(1.1); }
+}
+@keyframes floatBlob3 {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-100px, 40px) scale(1.2); }
+}
+
+/* Asegurar que el contenido quede ENCIMA de los blobs */
+.navbar, .container-fluid {
+    position: relative;
+    z-index: 1;
+}

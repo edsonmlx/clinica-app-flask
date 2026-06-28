@@ -28,10 +28,15 @@ class PronosticosView(BaseView):
                 model="llama-3.3-70b-versatile",
                 messages=[{"role": "user", "content": prompt}]
             )
-            return response.choices[0].message.content
-        except Exception as e:
-            return f"Error generando pronostico: {str(e)}"
+            texto = response.choices[0].message.content
 
+            import re
+            partes = re.split(r'\n?\s*\d+[\.\)]\s*', texto)
+            pronosticos = [p.strip() for p in partes if p.strip()]
+            return pronosticos[:3] if len(pronosticos) >= 3 else [texto]
+        except Exception as e:
+            return [f"Error generando pronostico: {str(e)}"]
+        
     @expose('/citas')
     @has_access
     def citas(self):
